@@ -8,7 +8,7 @@ def home():
     words = get_words('api/snowwhite.txt')
     write_words(words)
     
-    return render_template("index.html", words=words)
+    return render_template("index.html", first_part=words)
 
 @api.route("/select", methods=["POST"])
 def select():
@@ -16,17 +16,33 @@ def select():
     
     if request.form.get('word'):
         word_count = int(request.form.get('word'))
+        print(word_count)
+        all_words = get_words('api/snowwhite-alternative.txt')
+        first_part = all_words[:word_count]
+        second_part = all_words[word_count:]
+        
+        
+        # write_words(words)
+        
+        return render_template("index.html", first_part=first_part, second_part=second_part)
+    
+    if request.form.get('submit-cut'):
+        word_count = int(request.form.get('count'))
         words = get_words('api/snowwhite-alternative.txt')[:word_count]
+        
         write_words(words)
         
-        return render_template("index.html", words=words, add_text=True)
-
-    text_input = request.form.get('text-input')
-    with open('api/snowwhite-alternative.txt', 'a') as f:
-        f.write(text_input)
+        return render_template("index.html", first_part=words, add_text=True)
     
-    words = get_words('api/snowwhite-alternative.txt')
-    return render_template("index.html", words=words, add_text=False)
+    if request.form.get('submit-text'):
+        text = request.form.get('text-input')
+        
+        with open('api/snowwhite-alternative.txt', 'a') as f:
+            f.write(text)
+    
+        words = get_words('api/snowwhite-alternative.txt')
+        
+        return render_template("index.html", first_part=words, add_text=False)
 
 
 

@@ -3,7 +3,7 @@
   padding-right: 100px;;
 }
 
-.btn {
+.btn-first {
     border: none;
     cursor: pointer;
     background-color: inherit;
@@ -11,9 +11,24 @@
     text-align: left;
     white-space: pre-line;
   }
-  
-.btn:hover {
+
+.btn-second {
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+    padding: 2px;
+    text-align: left;
+    white-space: pre-line;
+    color: #a1a1a1;
+  }
+
+
+.btn-first:hover {
     color: #0e0eff;
+}
+
+.btn-second:hover {
+  color: #0e0eff;
 }
 
 .text-input{
@@ -42,4 +57,8 @@
   -ms-transform: scale(1.05);
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
+}
+
+.count {
+  visibility: hidden;
 }

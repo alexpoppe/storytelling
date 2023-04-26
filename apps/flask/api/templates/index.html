@@ -11,11 +11,19 @@
 
 <div class="text">
 <form method="post" action="{{ url_for('api.select') }}">
-{% for word in words %}
+{% for word in first_part %}
     {% if word == "\n"%}
     <br>
     {% else %}
-    <button class="btn" type="submit" name="word" value={{loop.index}}>{{word}}</button>
+    <button class="btn-first" type="submit" name="word" value={{loop.index}}>{{word}}</button>
+    {% endif %}
+{% endfor %}
+
+{% for word in second_part %}
+    {% if word == "\n"%}
+    <br>
+    {% else %}
+    <button class="btn-second" type="submit" name="word" value={{first_part|count + loop.index}}>{{word}}</button>
     {% endif %}
 {% endfor %}
 
@@ -24,7 +32,14 @@
         <textarea name="text-input" class="text-input" placeholder="Your text.."></textarea>
     </div>
     <div>
-        <input class="submit" type="submit" name="submit" value="Submit" placeholder="submit">
+        <input class="submit" type="submit" name="submit-text" value="Submit" placeholder="submit">
+    </div>
+{% else %}
+    <div>
+        <textarea name="count" class="count">{{first_part|count}}</textarea>
+    </div>
+    <div>
+        <input class="submit" type="submit" name="submit-cut" value="Submit" placeholder="submit">
     </div>
 {% endif %}
 </form>
