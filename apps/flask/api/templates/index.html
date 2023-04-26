@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('api.static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>Snow White</h1>
+
+<div class="text">
+<form method="post" action="{{ url_for('api.select') }}">
+{% for word in words %}
+    {% if word == "\n"%}
+    <br>
+    {% else %}
+    <button class="btn" type="submit" name="word" value={{loop.index}}>{{word}}</button>
+    {% endif %}
+{% endfor %}
+
+{% if add_text %}
+    <div>
+        <textarea name="text-input" class="text-input" placeholder="Your text.."></textarea>
+    </div>
+    <div>
+        <input class="submit" type="submit" name="submit" value="Submit" placeholder="submit">
+    </div>
+{% endif %}
+</form>
+
+</div>
+
+
+</body>
+</html>
